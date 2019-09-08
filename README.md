@@ -1,13 +1,13 @@
 # project-build.gradle 下添加
-<p>buildscript {
-   apply from: 'snail/rely.gradle'//1
-    addRepos(repositories)//2
-    dependencies {
-        classpath deeps.gradle.gradle//3
-        classpath deeps.gradle.kotlin//4
-    }
-}
+####buildscript {
+####   apply from: 'snail/rely.gradle'//1
+####    addRepos(repositories)//2
+####    dependencies {
+####        classpath deeps.gradle.gradle//3
+####        classpath deeps.gradle.kotlin//4
+####    }
+####}
 
-allprojects {
-    addRepos(repositories)
-}</p>
+####allprojects {
+####    addRepos(repositories)
+####}
