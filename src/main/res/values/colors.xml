@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="white_bg">#fff</color>
+    <color name="tv_color">#000</color>
+    <color name="code">#666666</color>
+    <color name="app_bg">#1D182E</color>
+    <color name="item">#bfbfbf</color>
+    <color name="white">#ffffffff</color>
+    <color name="a_bg">#EDF1F4</color>
+    <color name="green">#22B043</color>
+    <color name="green_bg">#6CC703</color>
+    <color name="app_background">#1111</color>
+    <color name="we_chat_black">#323232</color>
+    <color name="item_background">#F1F1F1</color>
+    <color name="app_main">@android:color/holo_orange_dark</color>
+    <color name="bar">#55E7EBEE</color>
+
+    <color name="colorShotBackground">#ffccc9</color>
+
+    <color name="item_bg">#464542</color>
+
+    <color name="hint">#757575</color>
+
+    <color name="gray">#F4F5F9</color>
+
+    <color name="colorSecondaryText">#939393</color>
+    <color name="colorPrimaryText">#8290AF</color>
+
+
+    <color name="p_bg">#dd0B2031</color>
+    <color name="k_bg">#bb0B2031</color>
+    <color name="app_bar">#aa0B2031</color>
+    <color name="r_bg">#990B2031</color>
+    <color name="google_green">#34A853</color>
+    <color name="img_bg">#cdcdcd</color>
+    <color name="filters_chips">#b3e5fc</color>
+    <color name="google_red">#EA4335</color>
+    <color name="google_yellow">#FBBC05</color>
+    <color name="light_blue">#A0DBFF</color>
+    <color name="blue">#4285F4</color>
+
+
+    <color name="toolbar">#F5F0E9</color>
+    <color name="app_layout_bg">#fff</color>
+</resources>

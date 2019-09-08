@@ -1,0 +1,76 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+android {
+    buildToolsVersion deeps.build.tools
+    compileSdkVersion deeps.build.compileSdk
+
+    defaultConfig {
+        minSdkVersion deeps.build.minSdk
+        targetSdkVersion deeps.build.targetSdk
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    testImplementation deeps.junit
+    api deeps.ktx.fragment
+    api deeps.ktx.collection
+    api deeps.ktx.coroutines
+    api deeps.kotlin.jdk8
+    api deeps.kotlin.reflect
+    api deeps.anko.anko
+    api deeps.anko.commons
+    api deeps.anko.appcompat
+    api deeps.support.appcompat
+    api deeps.support.v4
+    api deeps.support.material
+    api deeps.support.cardview
+    api deeps.support.recycler
+    api deeps.support.easypermissions
+    api deeps.support.core
+    api deeps.net.okhttp
+    api deeps.net.retrofit
+    api deeps.net.scalars
+    api deeps.net.interceptor
+    api deeps.net.adapter
+    api deeps.net.fastjson
+    api deeps.banner.banner
+    api deeps.banner.transforms
+    api deeps.recycler.helper
+    api deeps.recycler.divider
+    api deeps.constraint
+    api deeps.logger
+    api deeps.utilcode
+    api deeps.multidex
+    api deeps.svg
+    api deeps.et
+    api deeps.pictureSelector
+    api deeps.avatar
+    api deeps.fragmentation.fragmentation
+    api deeps.fragmentation.swipeback
+    api deeps.flowlayout
+
+    androidTestImplementation deeps.test.runner
+    androidTestImplementation deeps.test.core
+    androidTestImplementation deeps.test.testing
+    androidTestImplementation deeps.test.contrib
+    androidTestImplementation deeps.test.intents
+    androidTestImplementation deeps.test.uiautomator
+}

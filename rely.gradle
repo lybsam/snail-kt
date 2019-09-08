@@ -1,0 +1,143 @@
+ext.deeps = [:]
+
+def deeps = [:]
+
+def versions = [:]
+versions.ktx = '1.0.0'
+versions.gradle = '3.5.0'
+versions.junit = '4.12'
+versions.kotlin = '1.3.50'
+versions.support = '1.0.0'
+versions.core = '1.0.2'
+versions.constraint = '1.1.3'
+versions.uiAutomator = '2.2.0-alpha4'
+versions.coreTesting = '2.0.0'
+versions.espresso = '3.2.0'
+versions.runner = '1.2.0'
+versions.retrofit = '2.5.0'
+versions.okhttp = '3.12.0'
+versions.adapter = '0.9.2'
+versions.scalars = '2.4.0'
+versions.interceptor = '3.8.0'
+versions.fastjson = '1.1.70.android'
+versions.logger = '2.1.1'
+versions.utilcode = '1.7.1'
+versions.etext = '0.1.4'
+versions.banner = '2.1.5'
+versions.transforms = '1.2.32@aar'
+versions.helper = '2.9.46'
+versions.divider = '1.0.0'
+versions.diagonal = '1.0.9'
+versions.multidex = '1.0.3'
+versions.anko = '0.10.8'
+versions.transformations = '3.3.0'
+versions.svg = '1.0.5'
+versions.easypermissions = '3.0.0'
+versions.pictureSelector = 'v2.2.4'
+versions.avatar = '1.0.4'
+versions.fragmentation = '1.0.1'
+versions.flowlayout = '1.1.2'
+
+
+def build = [:]
+build.compileSdk = 29
+build.minSdk = 21
+build.targetSdk = 29
+build.tools = "29.0.2"
+deeps.build = build
+
+def ktx = [:]
+ktx.fragment = "androidx.fragment:fragment-ktx:$versions.ktx"
+ktx.collection = "androidx.collection:collection-ktx:$versions.ktx"
+ktx.coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.ktx"
+deeps.ktx = ktx
+
+def gradle = [:]
+gradle.gradle = "com.android.tools.build:gradle:$versions.gradle"
+gradle.kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
+deeps.gradle = gradle
+
+
+
+def kotlin = [:]
+kotlin.jdk8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$versions.kotlin"
+kotlin.reflect = "org.jetbrains.kotlin:kotlin-reflect:$versions.kotlin"
+deeps.kotlin = kotlin
+
+def anko = [:]
+anko.anko = "org.jetbrains.anko:anko:$versions.anko"
+anko.commons = "org.jetbrains.anko:anko-commons:$versions.anko"
+anko.appcompat = "org.jetbrains.anko:anko-appcompat-v7-commons:$versions.anko"
+deeps.anko = anko
+
+
+def support = [:]
+support.appcompat = "androidx.appcompat:appcompat:$versions.support"
+support.v4 = "androidx.legacy:legacy-support-v4:$versions.support"
+support.core = "androidx.core:core-ktx:$versions.core"
+support.recycler = "androidx.recyclerview:recyclerview:$versions.support"
+support.material = "com.google.android.material:material:$versions.support"
+support.cardview = "androidx.cardview:cardview:$versions.support"
+support.easypermissions = "pub.devrel:easypermissions:$versions.easypermissions"
+deeps.support = support
+
+def test = [:]
+test.testing = "androidx.arch.core:core-testing:$versions.coreTesting"
+test.contrib = "androidx.test.espresso:espresso-contrib:$versions.espresso"
+test.core = "androidx.test.espresso:espresso-core:$versions.espresso"
+test.intents = "androidx.test.espresso:espresso-intents:$versions.espresso"
+test.uiautomator = "androidx.test.uiautomator:uiautomator:$versions.uiAutomator"
+test.runner = "androidx.test:runner:$versions.runner"
+deeps.test = test
+
+def net = [:]
+net.okhttp = "com.squareup.okhttp3:okhttp:$versions.okhttp"
+net.retrofit = "com.squareup.retrofit2:retrofit:$versions.retrofit"
+net.scalars = "com.squareup.retrofit2:converter-scalars:$versions.scalars"
+net.interceptor = "com.squareup.okhttp3:logging-interceptor:$versions.interceptor"
+net.adapter = "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$versions.adapter"
+net.fastjson = "com.alibaba:fastjson:$versions.fastjson"
+deeps.net = net
+
+
+def banner = [:]
+banner.banner = "com.bigkoo:convenientbanner:$versions.banner"
+banner.transforms = "com.ToxicBakery.viewpager.transforms:view-pager-transforms:$versions.transforms"
+deeps.banner = banner
+
+def recycler = [:]
+recycler.helper = "com.github.CymChad:BaseRecyclerViewAdapterHelper:$versions.helper"
+recycler.divider = "com.choices.divider:RecyclerView_Divider:$versions.divider"
+deeps.recycler = recycler
+
+def fragmentation = [:]
+fragmentation.fragmentation = "me.yokeyword:fragmentationx:$versions.fragmentation"
+fragmentation.swipeback = "me.yokeyword:fragmentationx-swipeback:$versions.fragmentation"
+deeps.fragmentation = fragmentation
+
+deeps.junit = "junit:junit:$versions.junit"
+deeps.constraint = "androidx.constraintlayout:constraintlayout:$versions.constraint"
+deeps.logger = "com.orhanobut:logger:$versions.logger"
+deeps.utilcode = "com.blankj:utilcode:$versions.utilcode"
+deeps.et = "com.ms-square:expandableTextView:$versions.etext"
+deeps.multidex = "com.android.support:multidex:$versions.multidex"
+deeps.svg = "com.jaredrummler:animated-svg-view:$versions.svg"
+deeps.pictureSelector = "com.github.LuckSiege.PictureSelector:picture_library:$versions.pictureSelector"
+deeps.avatar = "cn.carbs.android:AvatarImageView:$versions.avatar"
+deeps.flowlayout = "com.hyman:flowlayout-lib:$versions.flowlayout"
+ext.deeps = deeps
+
+
+def addRepos(RepositoryHandler handler) {
+    handler.google()
+    handler.jcenter()
+    handler.mavenCentral()
+    handler.maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+    handler.maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
+    handler.maven { url "https://jitpack.io" }
+    handler.maven { url 'https://maven.google.com' }
+}
+
+ext.addRepos = this.&addRepos
+
+
