@@ -33,6 +33,7 @@ dependencies {
     api deeps.ktx.fragment
     api deeps.ktx.collection
     api deeps.ktx.coroutines
+    api deeps.ktx.core
     api deeps.kotlin.jdk8
     api deeps.kotlin.reflect
     api deeps.anko.anko
@@ -44,7 +45,6 @@ dependencies {
     api deeps.support.cardview
     api deeps.support.recycler
     api deeps.support.easypermissions
-    api deeps.support.core
     api deeps.net.okhttp
     api deeps.net.retrofit
     api deeps.net.scalars

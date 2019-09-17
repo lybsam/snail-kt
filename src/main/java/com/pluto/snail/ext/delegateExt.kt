@@ -23,14 +23,14 @@ fun SnailDelegate.start(delegate: SnailDelegate, vararg args: Pair<String, Any>)
 }
 
 
-fun Fragment.analysis(vararg keys: String): ArrayList<Any> {
+fun Fragment.analysis(vararg keys: String, block: (ArrayList<Any>) -> Unit) {
     val list = arrayListOf<Any>()
     this.arguments?.let { bundle ->
         keys.forEach {
             bundle.get(it)?.let { it1 -> list.add(it1) }
         }
     }
-    return list
+    block.invoke(list)
 }
 
 

@@ -40,9 +40,9 @@ abstract class BaseDelegate : Fragment(), ISupportFragment {
         DELEGATE.onDestroy()
     }
 
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-        DELEGATE.onAttach(context as Activity)
+    override fun onAttach(context: Context) {
+        super.onAttach(context!!)
+        DELEGATE.onAttach(context!! as Activity)
         _mActivity = DELEGATE.activity as ProxyActivity
     }
 

@@ -28,8 +28,8 @@ abstract class BaseAlert : DialogFragment() {
 
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
-        val window = getDialog().getWindow();
-        window?.requestFeature(Window.FEATURE_NO_TITLE);
+        val window = getDialog()!!.getWindow();
+        window?.requestFeature(Window.FEATURE_NO_TITLE)
         super.onActivityCreated(savedInstanceState);
         //设置背景为透明
         window?.setBackgroundDrawable(
