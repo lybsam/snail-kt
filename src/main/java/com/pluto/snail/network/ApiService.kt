@@ -18,6 +18,7 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import com.pluto.charon.ext.*
 import com.pluto.snail.app.Snail
 import com.pluto.snail.network.compat.enableTls12OnPreLollipop
+import kotlinx.coroutines.Job
 
 private val cacheFile by lazy {
     File(AppContext.cacheDir, "webServiceApi").apply { ensureDir() }
@@ -62,6 +63,7 @@ internal fun Result<Response<String>>.result(block: (String) -> Unit, err: () ->
 
 }
 
+var job: Job? = null
 
 fun Get(
     url: String,
@@ -69,8 +71,11 @@ fun Get(
     err: () -> Unit = {},
     block: (String) -> Unit
 ) {
-    GlobalScope.launch {
-        ApiService.get(url, toHMap(*params)).awaitOrError().result(block, err)
+    job = GlobalScope.launch {
+        ApiService.get(url, toHMap(*params)).awaitOrError().result({
+            job?.cancel()
+            block.invoke(it)
+        }, err)
     }
 }
 
@@ -82,15 +87,21 @@ fun Post(
     err: () -> Unit = {},
     block: (String) -> Unit = {}
 ) {
-    GlobalScope.launch {
+    job = GlobalScope.launch {
         type.yes {
             val body = RequestBody.create(
                 MediaType.parse("application/json;charset=UTF-8"),
                 jsSrt(*params)
             )
-            ApiService.postRaw(url, body).awaitOrError().result(block, err)
+            ApiService.postRaw(url, body).awaitOrError().result({
+                job?.cancel()
+                block.invoke(it)
+            }, err)
         }.otherwise {
-            ApiService.post(url, toHMap(*params)).awaitOrError().result(block, err)
+            ApiService.post(url, toHMap(*params)).awaitOrError().result({
+                job?.cancel()
+                block.invoke(it)
+            }, err)
         }
 
     }
@@ -103,14 +114,22 @@ fun Put(
     err: () -> Unit = {},
     block: (String) -> Unit = {}
 ) {
-    GlobalScope.launch {
+    job = GlobalScope.launch {
         type.yes {
             val body = RequestBody.create(
                 MediaType.parse("application/json;charset=UTF-8"),
                 jsSrt(*params)
             )
-            ApiService.putRaw(url, body).awaitOrError().result(block, err)
-        }.otherwise { ApiService.put(url, toHMap(*params)).awaitOrError().result(block, err) }
+            ApiService.putRaw(url, body).awaitOrError().result({
+                job?.cancel()
+                block.invoke(it)
+            }, err)
+        }.otherwise {
+            ApiService.put(url, toHMap(*params)).awaitOrError().result({
+                job?.cancel()
+                block.invoke(it)
+            }, err)
+        }
     }
 }
 
@@ -121,8 +140,11 @@ fun Delete(
     err: () -> Unit,
     block: (String) -> Unit = {}
 ) {
-    GlobalScope.launch {
-        ApiService.delete(url, toHMap(*params)).awaitOrError().result(block, err)
+    job = GlobalScope.launch {
+        ApiService.delete(url, toHMap(*params)).awaitOrError().result({
+            job?.cancel()
+            block.invoke(it)
+        }, err)
     }
 }
 
@@ -133,31 +155,16 @@ fun Load(
     err: () -> Unit = {},
     block: (String) -> Unit = {}
 ) {
-    GlobalScope.launch {
+    job = GlobalScope.launch {
         val file = File(path)
-        val body = RequestBody.create(MediaType.parse("image/jpeg"), file)
-        ApiService.upload("$url${file.name}", body).awaitOrError().result(block, err)
+        val requestBody = RequestBody.create(MediaType.parse(""), file)
+        val body = MultipartBody.Part.createFormData("image", file.name, requestBody)
+        ApiService.upload(url, body).awaitOrError().result({
+            job?.cancel()
+            block.invoke(it)
+        }, err)
     }
 }
-
-fun Load(
-    url: String,
-    paths: ArrayList<String>,
-    err: () -> Unit = {},
-    block: (String) -> Unit = {}
-) {
-    GlobalScope.launch {
-        paths.forEach {
-            val file = File(it)
-            val requestBody = RequestBody.create(MediaType.parse(""), file)
-            val body = MultipartBody.Part.createFormData("image", file.name, requestBody)
-            ApiService.upload(url, body).awaitOrError().result(block, err)
-        }
-    }
-}
-
-
-
 
 
 private fun toHMap(vararg params: Pair<String, Any>): HashMap<String, Any> {

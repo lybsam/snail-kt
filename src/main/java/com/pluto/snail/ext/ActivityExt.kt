@@ -8,10 +8,10 @@ import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import com.pluto.snail.AppContext
-import com.pluto.snail.R
 import org.jetbrains.anko.toast
 import java.io.File
 
@@ -55,7 +55,7 @@ fun Activity.twoFinish(TOUCH_TIME: Long): Long {
         finish()
     } else {
         _time = System.currentTimeMillis()
-        toast("双击退出${getString(R.string.app_name)}")
+        toast("双击退出${getString(com.pluto.snail.R.string.app_name)}")
     }
     return _time
 }
@@ -70,6 +70,17 @@ fun toast(str: String) {
     AppContext.toast(str)
 }
 
+fun hideSoftKeyboard(context: Context, vararg viewList: View) {
+    val inputMethodManager =
+        context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+
+    for (v in viewList) {
+        inputMethodManager!!.hideSoftInputFromWindow(
+            v.windowToken,
+            InputMethodManager.HIDE_NOT_ALWAYS
+        )
+    }
+}
 
 fun AppCompatActivity.installApk() {
     val filePath = "${Environment.getExternalStorageDirectory().path}/download/a_person.apk"
