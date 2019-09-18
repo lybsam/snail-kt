@@ -63,19 +63,14 @@ internal fun Result<Response<String>>.result(block: (String) -> Unit, err: () ->
 
 }
 
-var job: Job? = null
-
 fun Get(
     url: String,
     vararg params: Pair<String, Any>,
     err: () -> Unit = {},
     block: (String) -> Unit
 ) {
-    job = GlobalScope.launch {
-        ApiService.get(url, toHMap(*params)).awaitOrError().result({
-            job?.cancel()
-            block.invoke(it)
-        }, err)
+    GlobalScope.launch {
+        ApiService.get(url, toHMap(*params)).awaitOrError().result(block, err)
     }
 }
 
@@ -87,21 +82,15 @@ fun Post(
     err: () -> Unit = {},
     block: (String) -> Unit = {}
 ) {
-    job = GlobalScope.launch {
+    GlobalScope.launch {
         type.yes {
             val body = RequestBody.create(
                 MediaType.parse("application/json;charset=UTF-8"),
                 jsSrt(*params)
             )
-            ApiService.postRaw(url, body).awaitOrError().result({
-                job?.cancel()
-                block.invoke(it)
-            }, err)
+            ApiService.postRaw(url, body).awaitOrError().result(block, err)
         }.otherwise {
-            ApiService.post(url, toHMap(*params)).awaitOrError().result({
-                job?.cancel()
-                block.invoke(it)
-            }, err)
+            ApiService.post(url, toHMap(*params)).awaitOrError().result(block, err)
         }
 
     }
@@ -114,21 +103,15 @@ fun Put(
     err: () -> Unit = {},
     block: (String) -> Unit = {}
 ) {
-    job = GlobalScope.launch {
+    GlobalScope.launch {
         type.yes {
             val body = RequestBody.create(
                 MediaType.parse("application/json;charset=UTF-8"),
                 jsSrt(*params)
             )
-            ApiService.putRaw(url, body).awaitOrError().result({
-                job?.cancel()
-                block.invoke(it)
-            }, err)
+            ApiService.putRaw(url, body).awaitOrError().result(block, err)
         }.otherwise {
-            ApiService.put(url, toHMap(*params)).awaitOrError().result({
-                job?.cancel()
-                block.invoke(it)
-            }, err)
+            ApiService.put(url, toHMap(*params)).awaitOrError().result(block, err)
         }
     }
 }
@@ -140,11 +123,8 @@ fun Delete(
     err: () -> Unit,
     block: (String) -> Unit = {}
 ) {
-    job = GlobalScope.launch {
-        ApiService.delete(url, toHMap(*params)).awaitOrError().result({
-            job?.cancel()
-            block.invoke(it)
-        }, err)
+    GlobalScope.launch {
+        ApiService.delete(url, toHMap(*params)).awaitOrError().result(block, err)
     }
 }
 
@@ -155,14 +135,11 @@ fun Load(
     err: () -> Unit = {},
     block: (String) -> Unit = {}
 ) {
-    job = GlobalScope.launch {
+    GlobalScope.launch {
         val file = File(path)
         val requestBody = RequestBody.create(MediaType.parse(""), file)
         val body = MultipartBody.Part.createFormData("image", file.name, requestBody)
-        ApiService.upload(url, body).awaitOrError().result({
-            job?.cancel()
-            block.invoke(it)
-        }, err)
+        ApiService.upload(url, body).awaitOrError().result(block, err)
     }
 }
 
