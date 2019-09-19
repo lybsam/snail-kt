@@ -38,6 +38,7 @@ versions.pictureSelector = 'v2.2.4'
 versions.avatar = '1.0.4'
 versions.fragmentation = '1.0.1'
 versions.flowlayout = '1.1.2'
+versions.spinKit = '1.4.0'
 
 
 def build = [:]
@@ -125,6 +126,7 @@ deeps.svg = "com.jaredrummler:animated-svg-view:$versions.svg"
 deeps.pictureSelector = "com.github.LuckSiege.PictureSelector:picture_library:$versions.pictureSelector"
 deeps.avatar = "cn.carbs.android:AvatarImageView:$versions.avatar"
 deeps.flowlayout = "com.hyman:flowlayout-lib:$versions.flowlayout"
+deeps.spinkit = "com.github.ybq:Android-SpinKit:$versions.spinKit"
 ext.deeps = deeps
 
 

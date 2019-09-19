@@ -1,9 +1,18 @@
 package com.pluto.charon.network
 
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.pluto.charon.ext.ensureDir
+import com.pluto.charon.ext.jsSrt
+import com.pluto.charon.ext.otherwise
+import com.pluto.charon.ext.yes
 import com.pluto.snail.AppContext
+import com.pluto.snail.app.Snail
 import com.pluto.snail.ext.net.Result
 import com.pluto.snail.ext.net.awaitOrError
+import com.pluto.snail.network.compat.enableTls12OnPreLollipop
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.launch
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
@@ -14,11 +23,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.io.File
 import java.util.concurrent.TimeUnit
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.pluto.charon.ext.*
-import com.pluto.snail.app.Snail
-import com.pluto.snail.network.compat.enableTls12OnPreLollipop
-import kotlinx.coroutines.Job
 
 private val cacheFile by lazy {
     File(AppContext.cacheDir, "webServiceApi").apply { ensureDir() }
@@ -60,7 +64,6 @@ internal fun Result<Response<String>>.result(block: (String) -> Unit, err: () ->
             }
         }
     }
-
 }
 
 fun Get(
@@ -140,6 +143,7 @@ fun Load(
         val requestBody = RequestBody.create(MediaType.parse(""), file)
         val body = MultipartBody.Part.createFormData("image", file.name, requestBody)
         ApiService.upload(url, body).awaitOrError().result(block, err)
+
     }
 }
 

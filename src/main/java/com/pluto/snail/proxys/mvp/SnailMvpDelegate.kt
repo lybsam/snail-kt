@@ -18,7 +18,7 @@ abstract class SnailMvpDelegate<out P : SnailPresenter<SnailMvpDelegate<P>>> : I
     }
 
     private fun createPresenter(): P {
-        sequence<Type> {
+        sequence {
             var thisClass: Class<*> = this@SnailMvpDelegate.javaClass
             while (true) {
                 thisClass.genericSuperclass?.let { yield(it) }
