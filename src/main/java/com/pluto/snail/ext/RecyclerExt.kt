@@ -7,11 +7,16 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.chad.library.adapter.base.BaseQuickAdapter
 import com.pluto.snail.R
 import com.pluto.charon.ui.recycler.*
 
 @SuppressLint("WrongConstant")
-fun RecyclerView.initLinear(size: Int = 0, color: Int = R.color.p_bg, or: Int = LinearLayout.VERTICAL) {
+fun RecyclerView.initLinear(
+    size: Int = 0,
+    color: Int = R.color.p_bg,
+    or: Int = LinearLayout.VERTICAL
+) {
     val manager = LinearLayoutManager(context)
     manager.orientation = or
     layoutManager = manager
@@ -19,6 +24,7 @@ fun RecyclerView.initLinear(size: Int = 0, color: Int = R.color.p_bg, or: Int = 
 }
 
 
+@SuppressLint("WrongConstant")
 fun RecyclerView.initVPage(or: Int = LinearLayout.HORIZONTAL) {
     val manager = LinearLayoutManager(context)
     manager.orientation = or
@@ -35,3 +41,39 @@ fun RecyclerView.initMultiple(span: Int, size: Int = 0, color: Int = R.color.whi
     layoutManager = manager
 }
 
+
+fun <T> BaseQuickAdapter<T, *>.display(
+    list: ArrayList<T>,
+    page: Int,
+    ref: Boolean = false,
+    max: Int = 30
+) {
+    val size = list.size
+    if (page == 0 || this.data.size > 30) {
+        when (ref) {
+            true -> {
+                if (size >= max) {
+                    this.loadMoreComplete()
+                } else {
+                    this.loadMoreEnd(true)
+                }
+                this.setNewData(list)
+            }
+            false -> {
+                if (size >= max) {
+                    this.loadMoreEnd()
+                } else {
+                    this.loadMoreEnd(true)
+                }
+                this.addData(list)
+            }
+        }
+    } else {
+        if (this.data.size >= max) {
+            this.loadMoreEnd()
+        } else {
+            this.loadMoreEnd(true)
+        }
+    }
+    this.disableLoadMoreIfNotFullPage()
+}

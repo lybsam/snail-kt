@@ -9,8 +9,10 @@ import android.os.Build
 import android.os.Environment
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
+import androidx.fragment.app.Fragment
 import com.pluto.snail.AppContext
 import org.jetbrains.anko.toast
 import java.io.File
@@ -70,9 +72,9 @@ fun toast(str: String) {
     AppContext.toast(str)
 }
 
-fun hideSoftKeyboard(context: Context, vararg viewList: View) {
+fun AppCompatActivity.hideSoftKeyboard(vararg viewList: View) {
     val inputMethodManager =
-        context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        this.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
 
     for (v in viewList) {
         inputMethodManager!!.hideSoftInputFromWindow(
@@ -81,6 +83,25 @@ fun hideSoftKeyboard(context: Context, vararg viewList: View) {
         )
     }
 }
+
+fun Fragment.hideSoftKeyboard(vararg viewList: View) {
+    val inputMethodManager =
+        this.activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+
+    for (v in viewList) {
+        inputMethodManager!!.hideSoftInputFromWindow(
+            v.windowToken,
+            InputMethodManager.HIDE_NOT_ALWAYS
+        )
+    }
+}
+
+fun clearFocus(vararg views: EditText) {
+    views.forEach {
+        it.clearFocus()
+    }
+}
+
 
 fun AppCompatActivity.installApk() {
     val filePath = "${Environment.getExternalStorageDirectory().path}/download/a_person.apk"
