@@ -12,38 +12,58 @@ import com.pluto.snail.R
 import com.pluto.charon.ui.recycler.*
 
 @SuppressLint("WrongConstant")
-fun RecyclerView.initLinear(
+fun <T> RecyclerView.initLinear(
+    mAdapter: BaseQuickAdapter<T, *>,
     size: Int = 0,
     color: Int = R.color.p_bg,
-    or: Int = LinearLayout.VERTICAL
+    or: Int = LinearLayout.VERTICAL,
+    listener: BaseQuickAdapter.RequestLoadMoreListener? = null,
+    block: (BaseQuickAdapter<T, *>) -> Unit = {}
 ) {
     val manager = LinearLayoutManager(context)
     manager.orientation = or
     layoutManager = manager
     addItemDecoration(BaseDecoration.create(ContextCompat.getColor(context, color), size))
+    adapter = mAdapter
+    if (listener != null) mAdapter.setOnLoadMoreListener(listener, this)
+    block.invoke(mAdapter)
 }
 
 
 @SuppressLint("WrongConstant")
-fun RecyclerView.initVPage(or: Int = LinearLayout.HORIZONTAL) {
+fun <T> RecyclerView.initVPage(
+    mAdapter: BaseQuickAdapter<T, *>,
+    or: Int = LinearLayout.HORIZONTAL
+) {
     val manager = LinearLayoutManager(context)
     manager.orientation = or
     layoutManager = manager
     val helper = PagerSnapHelper()
     this.setOnFlingListener(null);
     helper.attachToRecyclerView(this)
+    adapter = mAdapter
 }
 
 
-fun RecyclerView.initMultiple(span: Int, size: Int = 0, color: Int = R.color.white) {
+fun <T> RecyclerView.initMultiple(
+    mAdapter: BaseQuickAdapter<T, *>,
+    span: Int = 4,
+    size: Int = 0,
+    color: Int = R.color.white,
+    listener: BaseQuickAdapter.RequestLoadMoreListener? = null,
+    block: (BaseQuickAdapter<T, *>) -> Unit = {}
+) {
     val manager = GridLayoutManager(context, span)
     addItemDecoration(BaseDecoration.create(ContextCompat.getColor(context, color), size))
     layoutManager = manager
+    adapter = mAdapter
+    if (listener != null) mAdapter.setOnLoadMoreListener(listener, this)
+    block.invoke(mAdapter)
 }
 
 
 fun <T> BaseQuickAdapter<T, *>.display(
-    list: ArrayList<T>,
+    list: List<T>,
     page: Int,
     ref: Boolean = false,
     max: Int = 30
