@@ -1,17 +1,15 @@
 package com.pluto.snail.proxys.mvp
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.pluto.charon.proxys.mvp.IMvpView
 import com.pluto.charon.proxys.mvp.IPresenter
 import com.pluto.charon.proxys.mvp.SnailPresenter
+import com.pluto.snail.proxys.SnailDelegate
 import java.lang.reflect.ParameterizedType
 
-
-abstract class SnailMvpActivity<out P : SnailPresenter<SnailMvpActivity<P>>> : AppCompatActivity(),
-    IMvpView<P> {
-
-    final override val presenter: P
+abstract class SnailDelegate<out P : SnailPresenter<com.pluto.snail.proxys.mvp.SnailDelegate<P>>> : IMvpView<P>,
+    SnailDelegate() {
+    override val presenter: P
 
     init {
         presenter = createPresenter()
@@ -20,9 +18,9 @@ abstract class SnailMvpActivity<out P : SnailPresenter<SnailMvpActivity<P>>> : A
 
     private fun createPresenter(): P {
         sequence {
-            var thisClass: Class<*> = this@SnailMvpActivity.javaClass
+            var thisClass: Class<*> = this@SnailDelegate.javaClass
             while (true) {
-                yield(thisClass.genericSuperclass)
+                thisClass.genericSuperclass?.let { yield(it) }
                 thisClass = thisClass.superclass ?: break
             }
         }.filter {
@@ -40,8 +38,6 @@ abstract class SnailMvpActivity<out P : SnailPresenter<SnailMvpActivity<P>>> : A
         super.onCreate(savedInstanceState)
         presenter.onCreate(savedInstanceState)
     }
-
-    override fun onViewStateRestored(savedInstanceState: Bundle?) {}
 
     override fun onStart() {
         super.onStart()
@@ -68,15 +64,13 @@ abstract class SnailMvpActivity<out P : SnailPresenter<SnailMvpActivity<P>>> : A
         super.onDestroy()
     }
 
-
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         presenter.onSaveInstanceState(outState)
     }
 
-    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
-        super.onRestoreInstanceState(savedInstanceState)
-        onViewStateRestored(savedInstanceState)
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
         presenter.onViewStateRestored(savedInstanceState)
     }
 }

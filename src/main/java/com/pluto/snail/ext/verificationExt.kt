@@ -1,5 +1,6 @@
 package com.pluto.snail.ext
 
+import android.text.TextUtils
 import com.google.android.material.textfield.TextInputEditText
 import java.util.regex.Pattern
 
@@ -17,6 +18,17 @@ fun String.isPhoneNum(block: (String) -> Unit) {
         return
     }
     block.invoke(this)
+}
+
+
+fun String.isEmail(block: () -> Unit) {
+    val telRegex =
+        "^[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]\\.[a-zA-Z][a-zA-Z\\.]*[a-zA-Z]$"
+    if (!TextUtils.isEmpty(this) && this.matches(telRegex.toRegex())) {
+        block.invoke()
+    } else {
+        toast("邮箱格式错误！")
+    }
 }
 
 
@@ -81,5 +93,8 @@ fun TextInputEditText.isOldPass(block: (String) -> Unit, pass: String) {
     }
     block.invoke(p1)
 }
+
+
+
 
 

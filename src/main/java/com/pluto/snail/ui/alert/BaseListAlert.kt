@@ -10,9 +10,8 @@ import androidx.fragment.app.DialogFragment
 import com.pluto.snail.R
 
 
-abstract class BaseAlert : DialogFragment(), DialogInterface.OnKeyListener {
+abstract class BaseListAlert<T> : DialogFragment(), DialogInterface.OnKeyListener {
     private var isBottom = false
-    protected var isOnkey = true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         when (isBottom) {
@@ -31,13 +30,18 @@ abstract class BaseAlert : DialogFragment(), DialogInterface.OnKeyListener {
 
     protected var noblock: () -> Unit = {}
     protected var beltblock: (Any) -> Unit = {}
+    protected var list:(List<T>) -> Unit = {}
 
     open fun onNoListener(noblock: () -> Unit) {
         this.noblock = noblock
     }
 
-    open fun onBelListener(beltblock: (Any) -> Unit) {
-        this.beltblock = beltblock
+    open fun onBelListener(exist: (Any) -> Unit) {
+        this.beltblock = exist
+    }
+
+    open fun onListListener(list: (List<T>) -> Unit) {
+        this.list = list
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -53,6 +57,7 @@ abstract class BaseAlert : DialogFragment(), DialogInterface.OnKeyListener {
         )
         val dialogHeight = getActivity()?.let { getContextRect(it) }
         //设置弹窗大小为会屏
+
         if (dialogHeight == 0)
             window.setLayout(
                 ViewGroup.LayoutParams.MATCH_PARENT,
@@ -63,10 +68,8 @@ abstract class BaseAlert : DialogFragment(), DialogInterface.OnKeyListener {
         val layoutParams = window.getAttributes()
         layoutParams.dimAmount = 0.0f
         window.setAttributes(layoutParams)
+        dialog!!.setOnKeyListener(this)
         init()
-        if (isOnkey) {
-            dialog!!.setOnKeyListener(this)
-        }
     }
 
     //获取内容区域
