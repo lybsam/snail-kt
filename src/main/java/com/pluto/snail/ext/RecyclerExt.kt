@@ -17,7 +17,7 @@ fun <T> RecyclerView.initLinear(
     size: Int = 0,
     color: Int = R.color.p_bg,
     or: Int = LinearLayout.VERTICAL,
-    isMore: Boolean = true,
+    isMore: Boolean = false,
     morelistener: () -> Unit = {},
     block: (BaseQuickAdapter<T, *>) -> Unit = {}
 ) {
@@ -51,7 +51,7 @@ fun <T> RecyclerView.initMultiple(
     span: Int = 4,
     size: Int = 0,
     color: Int = R.color.white,
-    isMore: Boolean = true,
+    isMore: Boolean = false,
     morelistener: () -> Unit = {},
     block: (BaseQuickAdapter<T, *>) -> Unit = {}
 ) {

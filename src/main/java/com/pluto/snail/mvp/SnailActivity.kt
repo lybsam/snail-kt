@@ -1,4 +1,4 @@
-package com.pluto.snail.proxys.mvp
+package com.pluto.snail.mvp
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -67,7 +67,6 @@ abstract class SnailActivity<out P : SnailPresenter<SnailActivity<P>>> : AppComp
         presenter.onDestroy()
         super.onDestroy()
     }
-
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
