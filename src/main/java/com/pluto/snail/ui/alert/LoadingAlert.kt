@@ -8,6 +8,7 @@ import com.github.ybq.android.spinkit.SpriteFactory
 import com.github.ybq.android.spinkit.Style
 import com.pluto.snail.R
 import com.pluto.snail.ext.analysis
+import com.pluto.snail.proxys.SnailDelegate
 import kotlinx.android.synthetic.main.alert_loding.*
 
 class LoadingAlert : BaseAlert() {
@@ -40,7 +41,7 @@ fun AppCompatActivity.loading(style: Int = Style.CHASING_DOTS.ordinal): LoadingA
     return loading
 }
 
-fun Fragment.loading(style: Int = Style.CHASING_DOTS.ordinal): LoadingAlert {
+fun SnailDelegate.loading(style: Int = Style.CHASING_DOTS.ordinal): LoadingAlert {
     val loading = LoadingAlert()
     val bundle = Bundle()
     bundle.putInt("style", style)
