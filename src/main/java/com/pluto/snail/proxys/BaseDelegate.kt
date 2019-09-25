@@ -14,9 +14,7 @@ import me.yokeyword.fragmentation.anim.FragmentAnimator
 
 abstract class BaseDelegate : Fragment(), ISupportFragment {
     private val DELEGATE = SupportFragmentDelegate(this)
-    private var isLock = true
     abstract fun layout(): Any
-
     lateinit var _mActivity: ProxyActivity
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,6 +28,7 @@ abstract class BaseDelegate : Fragment(), ISupportFragment {
         }
         return rootView
     }
+
 
     override fun onDestroy() {
         super.onDestroy()

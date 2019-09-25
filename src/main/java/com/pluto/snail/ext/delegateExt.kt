@@ -34,7 +34,7 @@ fun Fragment.analysis(vararg keys: String, block: (ArrayList<Any>) -> Unit) {
 }
 
 
-fun SnailDelegate.pop() {
+fun <T : SnailDelegate> T.pop() {
     this.supportDelegate.pop()
 }
 
