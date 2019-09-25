@@ -6,7 +6,4 @@ import com.pluto.snail.ui.alert.LoadingAlert
 abstract class SnailDelegate : BaseDelegate() {
     lateinit var loading: LoadingAlert
 
-    override fun bindView(state: Bundle?) {
-
-    }
 }

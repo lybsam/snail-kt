@@ -17,8 +17,6 @@ abstract class BaseDelegate : Fragment(), ISupportFragment {
     private var isLock = true
     abstract fun layout(): Any
 
-    abstract fun bindView(state: Bundle?)
-
     lateinit var _mActivity: ProxyActivity
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,7 +52,6 @@ abstract class BaseDelegate : Fragment(), ISupportFragment {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         DELEGATE.onActivityCreated(savedInstanceState)
-        bindView(savedInstanceState)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
