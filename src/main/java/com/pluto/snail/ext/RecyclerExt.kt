@@ -18,8 +18,7 @@ fun <T> RecyclerView.initLinear(
     color: Int = R.color.p_bg,
     or: Int = LinearLayout.VERTICAL,
     isMore: Boolean = false,
-    morelistener: () -> Unit = {},
-    block: (BaseQuickAdapter<T, *>) -> Unit = {}
+    morelistener: () -> Unit = {}
 ) {
     val manager = LinearLayoutManager(context)
     manager.orientation = or
@@ -27,7 +26,6 @@ fun <T> RecyclerView.initLinear(
     addItemDecoration(BaseDecoration.create(ContextCompat.getColor(context, color), size))
     adapter = mAdapter
     if (isMore) mAdapter.setOnLoadMoreListener({ morelistener.invoke() }, this)
-    block.invoke(mAdapter)
 }
 
 
@@ -52,16 +50,16 @@ fun <T> RecyclerView.initMultiple(
     size: Int = 0,
     color: Int = R.color.white,
     isMore: Boolean = false,
-    morelistener: () -> Unit = {},
-    block: (BaseQuickAdapter<T, *>) -> Unit = {}
+    morelistener: () -> Unit = {}
 ) {
     val manager = GridLayoutManager(context, span)
     addItemDecoration(BaseDecoration.create(ContextCompat.getColor(context, color), size))
     layoutManager = manager
     adapter = mAdapter
     if (isMore) mAdapter.setOnLoadMoreListener({ morelistener.invoke() }, this)
-    block.invoke(mAdapter)
 }
+
+
 
 
 fun <T> BaseQuickAdapter<T, *>.display(

@@ -6,8 +6,8 @@ import com.chad.library.adapter.base.BaseMultiItemQuickAdapter
 import com.chad.library.adapter.base.BaseQuickAdapter
 
 abstract class MultipleAdapter<T> constructor(entity: List<MultipleItemEntity>) :
-        BaseMultiItemQuickAdapter<MultipleItemEntity, MultipleViewHolder>(entity),
-        BaseQuickAdapter.SpanSizeLookup {
+    BaseMultiItemQuickAdapter<MultipleItemEntity, MultipleViewHolder>(entity),
+    BaseQuickAdapter.SpanSizeLookup {
 
     init {
         //设置宽度监听

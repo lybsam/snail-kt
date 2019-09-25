@@ -14,9 +14,12 @@ import me.yokeyword.fragmentation.anim.FragmentAnimator
 
 abstract class BaseDelegate : Fragment(), ISupportFragment {
     private val DELEGATE = SupportFragmentDelegate(this)
+    private var isLock = true
     abstract fun layout(): Any
+
+    abstract fun bindView(state: Bundle?)
+
     lateinit var _mActivity: ProxyActivity
-    abstract fun onBindView(state: Bundle?, rootView: View)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -28,11 +31,6 @@ abstract class BaseDelegate : Fragment(), ISupportFragment {
             else -> throw ClassCastException("type of setLayout() must be int or View!")
         }
         return rootView
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        onBindView(savedInstanceState, view)
     }
 
     override fun onDestroy() {
@@ -56,6 +54,7 @@ abstract class BaseDelegate : Fragment(), ISupportFragment {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         DELEGATE.onActivityCreated(savedInstanceState)
+        bindView(savedInstanceState)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

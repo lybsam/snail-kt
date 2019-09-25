@@ -34,6 +34,8 @@ abstract class SnailDelegate<out P : SnailPresenter<com.pluto.snail.mvp.SnailDel
         }
     }
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         presenter.onCreate(savedInstanceState)
