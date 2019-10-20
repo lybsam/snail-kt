@@ -7,7 +7,7 @@ import java.lang.reflect.ParameterizedType
 abstract class SnailDelegate<out P : SnailPresenter<com.pluto.snail.mvp.SnailDelegate<P>>> :
     IMvpView<P>,
     SnailDelegate() {
-    override val presenter: P
+    override val presenter: @UnsafeVariance P
 
     init {
         presenter = createPresenter()

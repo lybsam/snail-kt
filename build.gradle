@@ -67,6 +67,7 @@ dependencies {
     api deeps.fragmentation.swipeback
     api deeps.flowlayout
     api deeps.spinkit
+    api deeps.autosize
 
     androidTestImplementation deeps.test.runner
     androidTestImplementation deeps.test.core

@@ -39,6 +39,7 @@ versions.avatar = '1.0.4'
 versions.fragmentation = '1.0.1'
 versions.flowlayout = '1.1.2'
 versions.spinKit = '1.4.0'
+versions.autosize = '1.1.2'
 
 
 def build = [:]
@@ -127,6 +128,7 @@ deeps.pictureSelector = "com.github.LuckSiege.PictureSelector:picture_library:$v
 deeps.avatar = "cn.carbs.android:AvatarImageView:$versions.avatar"
 deeps.flowlayout = "com.hyman:flowlayout-lib:$versions.flowlayout"
 deeps.spinkit = "com.github.ybq:Android-SpinKit:$versions.spinKit"
+deeps.autosize = "me.jessyan:autosize:$versions.autosize"
 ext.deeps = deeps
 
 

@@ -14,17 +14,11 @@ open class SnailApp : MultiDexApplication() {
         super.onCreate()
         INSTANCE = this
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
-        Snail.snail()
-            .addBaseUrl("http://47.107.56.217:8080/")
-            .addInterceptor(DebugInterceptor("dmeoTest", R.raw.test))
-//                .addInterceptor(TokenInterceptor())
-            .configurator()
     }
 
     override fun attachBaseContext(base: Context?) {
         MultiDex.install(base)
         super.attachBaseContext(base)
-
     }
 }
 

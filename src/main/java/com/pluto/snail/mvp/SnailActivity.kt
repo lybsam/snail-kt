@@ -8,7 +8,7 @@ import java.lang.reflect.ParameterizedType
 abstract class SnailActivity<out P : SnailPresenter<SnailActivity<P>>> : AppCompatActivity(),
     IMvpView<P> {
 
-    final override val presenter: P
+    final override val presenter: @UnsafeVariance P
 
     init {
         presenter = createPresenter()
