@@ -105,7 +105,7 @@ fun Activity.easyPermissions(success: () -> Unit, arr: ArrayList<String>) {
 
 
 @AfterPermissionGranted(RC_CAMERA_AND_LOCATION)
-fun Fragment.easyPermissions(hash: () -> Unit, arr: ArrayList<String>) {
+fun Fragment.easyPermissions(arr: ArrayList<String>, hash: () -> Unit = {}) {
     val fm = this
     val perms = arrayOf(
         Manifest.permission.CAMERA,

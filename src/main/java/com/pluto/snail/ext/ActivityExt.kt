@@ -1,6 +1,7 @@
 package com.pluto.snail.ext
 
 import android.app.Activity
+import android.app.DownloadManager
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -13,6 +14,7 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
+import com.pluto.charon.ext.logger
 import com.pluto.snail.AppContext
 import org.jetbrains.anko.toast
 import java.io.File
@@ -103,18 +105,43 @@ fun clearFocus(vararg views: EditText) {
 }
 
 
-fun AppCompatActivity.installApk() {
-    val filePath = "${Environment.getExternalStorageDirectory().path}/download/a_person.apk"
-    val intent = Intent(Intent.ACTION_VIEW)
-    val file = File(filePath)
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-        val apkUri = FileProvider.getUriForFile(this, this.packageName + ".fileprovider", file)
-        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-        intent.setDataAndType(apkUri, "application/vnd.android.package-archive")
-    } else {
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        val uri = Uri.fromFile(file)
-        intent.setDataAndType(uri, "application/vnd.android.package-archive")
+fun AppCompatActivity.installApk(id: Long, name: String) {
+    val intentInstall = Intent()
+    intentInstall.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+    intentInstall.action = Intent.ACTION_VIEW
+    var uri: Uri
+    val downloadManager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) { // 6.0以下
+        uri = downloadManager.getUriForDownloadedFile(id)
+        intentInstall.setDataAndType(uri, "application/vnd.android.package-archive")
+    } else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) { // 6.0 - 7.0
+        val query = DownloadManager.Query()
+        query.setFilterById(id)
+        query.setFilterByStatus(DownloadManager.STATUS_SUCCESSFUL)
+        val cursor = downloadManager.query(query)
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                val path = cursor.getString(cursor.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI))
+                val apkFile = File(Uri.parse(path).path)
+                uri = Uri.fromFile(apkFile)
+                intentInstall.setDataAndType(uri, "application/vnd.android.package-archive")
+            }
+        }
+
+    } else { // Android 7.0 以上
+        uri = FileProvider.getUriForFile(
+            this,
+            "${packageName}.fileProvider",
+            File(
+                this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS),
+                "${name}.apk"
+            )
+        )
+
+        intentInstall.setDataAndType(uri, "application/vnd.android.package-archive")
+        intentInstall.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
     }
-    this.startActivity(intent)
+
+
+    this.startActivity(intentInstall)
 }

@@ -16,7 +16,7 @@ class LoadingAlert : BaseAlert() {
         return R.layout.alert_loding
     }
 
-    override fun init() {
+    override fun bindView() {
         analysis("style", "color") {
             val count = it[0].toString().toInt()
             val style = Style.values()[count]

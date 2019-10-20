@@ -28,18 +28,6 @@ abstract class BaseAlert : DialogFragment(), DialogInterface.OnKeyListener {
         return inflater.inflate(layout(), null)
     }
 
-
-    protected var noblock: () -> Unit = {}
-    protected var beltblock: (Any) -> Unit = {}
-
-    open fun onNoListener(noblock: () -> Unit) {
-        this.noblock = noblock
-    }
-
-    open fun onBelListener(beltblock: (Any) -> Unit) {
-        this.beltblock = beltblock
-    }
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         val window = getDialog()?.getWindow()!!
         window.requestFeature(Window.FEATURE_NO_TITLE)
@@ -63,7 +51,7 @@ abstract class BaseAlert : DialogFragment(), DialogInterface.OnKeyListener {
         val layoutParams = window.getAttributes()
         layoutParams.dimAmount = 0.0f
         window.setAttributes(layoutParams)
-        init()
+        bindView()
         if (isOnkey) {
             dialog!!.setOnKeyListener(this)
         }
@@ -79,7 +67,7 @@ abstract class BaseAlert : DialogFragment(), DialogInterface.OnKeyListener {
 
     abstract fun layout(): Int
 
-    abstract fun init()
+    abstract fun bindView()
 
     protected fun isBottom(isBottom: Boolean) {
         this.isBottom = isBottom

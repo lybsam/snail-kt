@@ -10,12 +10,11 @@ class XoManage private constructor() {
     }
 
 
-    fun <T> execute(type: Int): IXoListener<T> {
+    fun <T> execute(type: Int, data: T) {
         val block = CALLBACKS[type]
         if (block != null) {
-            return block as IXoListener<T>
+            (block as IXoListener<T>).execute(data)
         }
-        throw NullPointerException("$type IS NULL")
     }
 
 
@@ -71,23 +70,23 @@ object Xo {
     }
 
     fun busToStr(type: Int, data: String) {
-        XoManage.bus.execute<String>(type).execute(data)
+        XoManage.bus.execute<String>(type, data)
     }
 
     fun busToJson(type: Int, data: Any) {
         val str = JSON.toJSONString(data)
-        XoManage.bus.execute<String>(type).execute(str)
+        XoManage.bus.execute<String>(type, str)
     }
 
     fun busToNum(type: Int, data: Int) {
-        XoManage.bus.execute<Int>(type).execute(data)
+        XoManage.bus.execute<Int>(type, data)
     }
 
     fun busTobool(type: Int, data: Boolean) {
-        XoManage.bus.execute<Boolean>(type).execute(data)
+        XoManage.bus.execute<Boolean>(type, data)
     }
 
     fun busToNot(type: Int) {
-        XoManage.bus.execute<String>(type).execute("")
+        XoManage.bus.execute<String>(type, "")
     }
 }

@@ -1,4 +1,4 @@
-package com.pluto.charon.proxys.mvp
+package com.pluto.snail.mvp
 
 interface IPresenter<out View: IMvpView<IPresenter<View>>>: ILifecycle{
     val view: View

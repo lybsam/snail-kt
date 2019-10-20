@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.pluto.snail.R
 import com.pluto.charon.ui.recycler.*
+import com.pluto.snail.bus.Xo
 
 @SuppressLint("WrongConstant")
 fun <T> RecyclerView.initLinear(
@@ -43,7 +44,7 @@ fun <T> RecyclerView.initVPage(
     adapter = mAdapter
 }
 
-
+const val CLICK_ADAPTER = 100000
 fun <T> RecyclerView.initMultiple(
     mAdapter: BaseQuickAdapter<T, *>,
     span: Int = 4,
@@ -57,9 +58,8 @@ fun <T> RecyclerView.initMultiple(
     layoutManager = manager
     adapter = mAdapter
     if (isMore) mAdapter.setOnLoadMoreListener({ morelistener.invoke() }, this)
+
 }
-
-
 
 
 fun <T> BaseQuickAdapter<T, *>.display(

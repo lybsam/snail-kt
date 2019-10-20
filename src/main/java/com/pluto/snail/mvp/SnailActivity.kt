@@ -2,9 +2,6 @@ package com.pluto.snail.mvp
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.pluto.charon.proxys.mvp.IMvpView
-import com.pluto.charon.proxys.mvp.IPresenter
-import com.pluto.charon.proxys.mvp.SnailPresenter
 import java.lang.reflect.ParameterizedType
 
 

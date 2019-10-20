@@ -1,13 +1,11 @@
 package com.pluto.snail.mvp
 
 import android.os.Bundle
-import com.pluto.charon.proxys.mvp.IMvpView
-import com.pluto.charon.proxys.mvp.IPresenter
-import com.pluto.charon.proxys.mvp.SnailPresenter
 import com.pluto.snail.proxys.SnailDelegate
 import java.lang.reflect.ParameterizedType
 
-abstract class SnailDelegate<out P : SnailPresenter<com.pluto.snail.mvp.SnailDelegate<P>>> : IMvpView<P>,
+abstract class SnailDelegate<out P : SnailPresenter<com.pluto.snail.mvp.SnailDelegate<P>>> :
+    IMvpView<P>,
     SnailDelegate() {
     override val presenter: P
 
@@ -33,7 +31,6 @@ abstract class SnailDelegate<out P : SnailPresenter<com.pluto.snail.mvp.SnailDel
             return (it as Class<P>).newInstance()
         }
     }
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

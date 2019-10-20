@@ -1,4 +1,4 @@
-package com.pluto.charon.proxys.mvp
+package com.pluto.snail.mvp
 
 import android.content.res.Configuration
 import android.os.Bundle
