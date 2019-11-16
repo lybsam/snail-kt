@@ -27,7 +27,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 }
-
+//
 dependencies {
     testImplementation deeps.junit
     api deeps.ktx.fragment
@@ -68,6 +68,7 @@ dependencies {
     api deeps.flowlayout
     api deeps.spinkit
     api deeps.autosize
+    api deeps.transformations
 
     androidTestImplementation deeps.test.runner
     androidTestImplementation deeps.test.core

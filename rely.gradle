@@ -4,7 +4,7 @@ def deeps = [:]
 
 def versions = [:]
 versions.ktx = '1.0.0'
-versions.gradle = '3.5.1'
+versions.gradle = '3.5.2'
 versions.junit = '4.12'
 versions.kotlin = '1.3.50'
 versions.support = '1.0.0'
@@ -31,7 +31,7 @@ versions.divider = '1.0.0'
 versions.diagonal = '1.0.9'
 versions.multidex = '1.0.3'
 versions.anko = '0.10.8'
-versions.transformations = '3.3.0'
+versions.transformations = '4.1.0'
 versions.svg = '1.0.5'
 versions.easypermissions = '3.0.0'
 versions.pictureSelector = 'v2.2.4'
@@ -129,6 +129,7 @@ deeps.avatar = "cn.carbs.android:AvatarImageView:$versions.avatar"
 deeps.flowlayout = "com.hyman:flowlayout-lib:$versions.flowlayout"
 deeps.spinkit = "com.github.ybq:Android-SpinKit:$versions.spinKit"
 deeps.autosize = "me.jessyan:autosize:$versions.autosize"
+deeps.transformations = "jp.wasabeef:glide-transformations:$versions.transformations"
 ext.deeps = deeps
 
 
