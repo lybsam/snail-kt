@@ -1,4 +1,4 @@
-package com.pluto.charon.ext
+package com.pluto.snail.ext
 
 import com.pluto.charon.ui.recycler.MultipleEntityBuilder
 import com.pluto.charon.ui.recycler.MultipleFields

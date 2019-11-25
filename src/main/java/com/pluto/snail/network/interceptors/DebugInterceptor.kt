@@ -1,4 +1,4 @@
-package  com.pluto.charon.network.interceptors
+package  com.pluto.snail.network.interceptors
 
 import androidx.annotation.RawRes
 import com.pluto.snail.util.file.FileUtil

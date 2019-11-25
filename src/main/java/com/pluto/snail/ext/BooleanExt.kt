@@ -1,4 +1,4 @@
-package com.pluto.charon.ext
+package com.pluto.snail.ext
 
 sealed class BooleanExt<out T>
 

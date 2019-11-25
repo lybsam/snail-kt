@@ -1,4 +1,4 @@
-package com.pluto.charon.util
+package com.pluto.snail.util
 
 import android.provider.MediaStore
 import android.content.ContentUris

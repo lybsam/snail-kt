@@ -1,4 +1,4 @@
-package com.pluto.charon.ext
+package com.pluto.snail.ext
 
 import android.Manifest
 import android.app.Activity

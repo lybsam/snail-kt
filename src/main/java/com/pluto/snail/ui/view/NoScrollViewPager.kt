@@ -1,4 +1,4 @@
-package com.pluto.charon.ui.view
+package com.pluto.snail.ui.view
 
 import android.content.Context
 import android.util.AttributeSet

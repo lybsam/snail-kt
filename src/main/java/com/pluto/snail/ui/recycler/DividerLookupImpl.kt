@@ -1,4 +1,4 @@
-package  com.pluto.charon.ui.recycler
+package  com.pluto.snail.ui.recycler
 
 import com.choices.divider.Divider
 import com.choices.divider.DividerItemDecoration

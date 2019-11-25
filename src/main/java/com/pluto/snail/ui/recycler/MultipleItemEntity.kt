@@ -1,4 +1,4 @@
-package  com.pluto.charon.ui.recycler
+package  com.pluto.snail.ui.recycler
 
 import com.chad.library.adapter.base.entity.MultiItemEntity
 import java.io.Serializable

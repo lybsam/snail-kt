@@ -1,18 +1,16 @@
-package com.pluto.charon.network
+package com.pluto.snail.network
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.pluto.charon.ext.ensureDir
-import com.pluto.charon.ext.jsSrt
-import com.pluto.charon.ext.otherwise
-import com.pluto.charon.ext.yes
 import com.pluto.snail.AppContext
 import com.pluto.snail.app.Snail
+import com.pluto.snail.ext.ensureDir
+import com.pluto.snail.ext.jsSrt
 import com.pluto.snail.ext.net.Result
 import com.pluto.snail.ext.net.awaitOrError
+import com.pluto.snail.ext.otherwise
+import com.pluto.snail.ext.yes
 import com.pluto.snail.network.compat.enableTls12OnPreLollipop
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.launch
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor

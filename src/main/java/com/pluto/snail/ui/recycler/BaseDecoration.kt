@@ -1,4 +1,4 @@
-package com.pluto.charon.ui.recycler
+package com.pluto.snail.ui.recycler
 
 import androidx.annotation.ColorInt
 import com.choices.divider.DividerItemDecoration

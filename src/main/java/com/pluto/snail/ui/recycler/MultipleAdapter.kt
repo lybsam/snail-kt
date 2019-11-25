@@ -1,4 +1,4 @@
-package com.pluto.charon.ui.recycler
+package com.pluto.snail.ui.recycler
 
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
