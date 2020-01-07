@@ -9,8 +9,7 @@ import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.pluto.snail.R
-import com.pluto.charon.ui.recycler.*
-import com.pluto.snail.bus.Xo
+import com.pluto.snail.ui.recycler.BaseDecoration
 
 @SuppressLint("WrongConstant")
 fun <T> RecyclerView.initLinear(

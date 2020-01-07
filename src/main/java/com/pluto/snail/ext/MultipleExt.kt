@@ -1,9 +1,8 @@
 package com.pluto.snail.ext
 
-import com.pluto.charon.ui.recycler.MultipleEntityBuilder
-import com.pluto.charon.ui.recycler.MultipleFields
-import com.pluto.charon.ui.recycler.MultipleItemEntity
-
+import com.pluto.snail.ui.recycler.MultipleEntityBuilder
+import com.pluto.snail.ui.recycler.MultipleFields
+import com.pluto.snail.ui.recycler.MultipleItemEntity
 
 
 fun MultipleEntityBuilder.type(v: Int): MultipleEntityBuilder {

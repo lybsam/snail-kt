@@ -2,9 +2,10 @@ package com.pluto.snail.ext
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import com.pluto.snail.proxys.BaseDelegate
 import com.pluto.snail.proxys.SnailDelegate
 
-fun <T : SnailDelegate, K : SnailDelegate> T.start(delegate: K, vararg args: Pair<String, Any>) {
+fun <T : BaseDelegate, K : SnailDelegate> T.start(delegate: K, vararg args: Pair<String, Any>) {
     val bundle = Bundle()
     val data = HashMap<String, Any>()
     if (args.isNotEmpty()) {

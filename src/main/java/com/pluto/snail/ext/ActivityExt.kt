@@ -14,7 +14,6 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
-import com.pluto.charon.ext.logger
 import com.pluto.snail.AppContext
 import org.jetbrains.anko.toast
 import java.io.File

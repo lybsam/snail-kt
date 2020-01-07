@@ -7,11 +7,13 @@ import java.lang.ref.SoftReference
 import java.util.*
 
 
-class MultipleItemEntity(fields: LinkedHashMap<Any, Any>):MultiItemEntity,Serializable{
+class MultipleItemEntity private constructor(fields: LinkedHashMap<Any, Any>) : MultiItemEntity,
+    Serializable {
 
     private val ITEM_QUEUE = ReferenceQueue<LinkedHashMap<Any, Any>>()
     private val MULTIPLE_FIELDS = LinkedHashMap<Any, Any>()
     private val FIELDS_REFERENCE = SoftReference(MULTIPLE_FIELDS, ITEM_QUEUE)
+
     init {
         FIELDS_REFERENCE.get()?.putAll(fields)
     }
