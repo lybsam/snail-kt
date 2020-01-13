@@ -36,8 +36,8 @@ abstract class SnailActivity<out P : SnailPresenter<SnailActivity<P>>> : AppComp
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         presenter.onCreate(savedInstanceState)
+        presenter.onLazyInitView(savedInstanceState)
     }
-
     override fun onViewStateRestored(savedInstanceState: Bundle?) {}
 
     override fun onStart() {

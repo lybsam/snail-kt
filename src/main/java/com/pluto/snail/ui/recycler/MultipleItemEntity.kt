@@ -7,7 +7,7 @@ import java.lang.ref.SoftReference
 import java.util.*
 
 
-class MultipleItemEntity private constructor(fields: LinkedHashMap<Any, Any>) : MultiItemEntity,
+class MultipleItemEntity(fields: LinkedHashMap<Any, Any>) : MultiItemEntity,
     Serializable {
 
     private val ITEM_QUEUE = ReferenceQueue<LinkedHashMap<Any, Any>>()

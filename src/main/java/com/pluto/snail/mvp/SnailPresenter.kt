@@ -16,4 +16,5 @@ abstract class SnailPresenter<out V : IMvpView<SnailPresenter<V>>> : IPresenter<
     override fun onStop() = Unit
     override fun onResume() = Unit
     override fun onPause() = Unit
+    override fun onLazyInitView(savedInstanceState: Bundle?) = Unit
 }

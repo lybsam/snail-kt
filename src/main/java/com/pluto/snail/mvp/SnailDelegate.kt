@@ -1,5 +1,6 @@
 package com.pluto.snail.mvp
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import com.pluto.snail.proxys.SnailDelegate
 import java.lang.reflect.ParameterizedType
@@ -36,6 +37,12 @@ abstract class SnailDelegate<out P : SnailPresenter<com.pluto.snail.mvp.SnailDel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         presenter.onCreate(savedInstanceState)
+    }
+
+
+    override fun onLazyInitView(savedInstanceState: Bundle?) {
+        super.onLazyInitView(savedInstanceState)
+        presenter.onLazyInitView(savedInstanceState)
     }
 
     override fun onStart() {

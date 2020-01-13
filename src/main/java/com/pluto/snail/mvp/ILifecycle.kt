@@ -11,6 +11,8 @@ interface ILifecycle {
 
     fun onViewStateRestored(savedInstanceState: Bundle?)
 
+    fun onLazyInitView(savedInstanceState: Bundle?)
+
     fun onConfigurationChanged(newConfig: Configuration)
 
     fun onDestroy()
@@ -22,5 +24,6 @@ interface ILifecycle {
     fun onResume()
 
     fun onPause()
+
 
 }
