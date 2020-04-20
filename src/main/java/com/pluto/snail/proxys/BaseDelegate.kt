@@ -113,6 +113,7 @@ abstract class BaseDelegate : Fragment(), ISupportFragment {
         return DELEGATE.onBackPressedSupport()
     }
 
+
     override fun getSupportDelegate(): SupportFragmentDelegate {
         return DELEGATE
     }

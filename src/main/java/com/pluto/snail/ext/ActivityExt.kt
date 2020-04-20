@@ -1,13 +1,19 @@
 package com.pluto.snail.ext
 
+import android.R.attr.tag
 import android.app.Activity
 import android.app.DownloadManager
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.net.Uri
+import android.net.wifi.WifiManager
 import android.os.Build
 import android.os.Environment
+import android.provider.Settings
+import android.telephony.TelephonyManager
+import android.text.TextUtils.isEmpty
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -17,6 +23,7 @@ import androidx.fragment.app.Fragment
 import com.pluto.snail.AppContext
 import org.jetbrains.anko.toast
 import java.io.File
+import java.util.*
 
 
 fun Activity.barTandBlack(isText: Boolean, isColor: Boolean = false) {
@@ -31,7 +38,6 @@ fun Activity.barTandBlack(isText: Boolean, isColor: Boolean = false) {
         false -> Color.TRANSPARENT
     }
 }
-
 
 fun Activity.barTextColor(isText: Boolean = false) {
     val decorView = window.decorView

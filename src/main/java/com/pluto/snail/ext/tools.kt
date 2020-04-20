@@ -66,7 +66,6 @@ fun Activity.easyPermissions(success: () -> Unit, arr: ArrayList<String>) {
     val activity = this
     val perms = arrayOf(
         Manifest.permission.CAMERA,
-        Manifest.permission.ACCESS_FINE_LOCATION,
         Manifest.permission.WRITE_EXTERNAL_STORAGE
     )
     if (EasyPermissions.hasPermissions(activity, *perms)) {

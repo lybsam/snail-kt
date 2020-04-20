@@ -2,10 +2,11 @@ package com.pluto.snail.mvp
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.pluto.snail.proxys.BaseActivity
 import java.lang.reflect.ParameterizedType
 
 
-abstract class SnailActivity<out P : SnailPresenter<SnailActivity<P>>> : AppCompatActivity(),
+abstract class SnailActivity<out P : SnailPresenter<SnailActivity<P>>> : BaseActivity(),
     IMvpView<P> {
 
     final override val presenter: @UnsafeVariance P
@@ -36,9 +37,12 @@ abstract class SnailActivity<out P : SnailPresenter<SnailActivity<P>>> : AppComp
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         presenter.onCreate(savedInstanceState)
-        presenter.onLazyInitView(savedInstanceState)
     }
     override fun onViewStateRestored(savedInstanceState: Bundle?) {}
+
+    override fun onLazyInitView(savedInstanceState: Bundle?) {
+
+    }
 
     override fun onStart() {
         super.onStart()

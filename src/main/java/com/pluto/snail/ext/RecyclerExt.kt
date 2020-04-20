@@ -1,51 +1,18 @@
 package com.pluto.snail.ext
 
-import android.annotation.SuppressLint
-import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.pluto.snail.R
 import com.pluto.snail.ui.recycler.BaseDecoration
-
-@SuppressLint("WrongConstant")
-fun <T> RecyclerView.initLinear(
-    mAdapter: BaseQuickAdapter<T, *>,
-    size: Int = 0,
-    color: Int = R.color.p_bg,
-    or: Int = LinearLayout.VERTICAL,
-    isMore: Boolean = false,
-    morelistener: () -> Unit = {}
-) {
-    val manager = LinearLayoutManager(context)
-    manager.orientation = or
-    layoutManager = manager
-    addItemDecoration(BaseDecoration.create(ContextCompat.getColor(context, color), size))
-    adapter = mAdapter
-    if (isMore) mAdapter.setOnLoadMoreListener({ morelistener.invoke() }, this)
-}
+import com.pluto.snail.ui.recycler.QuickMultipleAdapter
 
 
-@SuppressLint("WrongConstant")
-fun <T> RecyclerView.initVPage(
-    mAdapter: BaseQuickAdapter<T, *>,
-    or: Int = LinearLayout.HORIZONTAL
-) {
-    val manager = LinearLayoutManager(context)
-    manager.orientation = or
-    layoutManager = manager
-    val helper = PagerSnapHelper()
-    this.setOnFlingListener(null);
-    helper.attachToRecyclerView(this)
-    adapter = mAdapter
-}
 
-const val CLICK_ADAPTER = 100000
+
 fun <T> RecyclerView.initMultiple(
-    mAdapter: BaseQuickAdapter<T, *>,
+    mAdapter: QuickMultipleAdapter<T>,
     span: Int = 4,
     size: Int = 0,
     color: Int = R.color.white,
@@ -56,7 +23,12 @@ fun <T> RecyclerView.initMultiple(
     addItemDecoration(BaseDecoration.create(ContextCompat.getColor(context, color), size))
     layoutManager = manager
     adapter = mAdapter
-    if (isMore) mAdapter.setOnLoadMoreListener({ morelistener.invoke() }, this)
+    if (isMore) {
+        mAdapter.loadMoreModule.setOnLoadMoreListener({ morelistener.invoke() })
+        mAdapter.loadMoreModule.isAutoLoadMore = true
+        //当自动加载开启，同时数据不满一屏时，是否继续执行自动加载更多(默认为true)
+        mAdapter.loadMoreModule.isEnableLoadMoreIfNotFullPage = false
+    }
 
 }
 
@@ -72,27 +44,26 @@ fun <T> BaseQuickAdapter<T, *>.display(
         when (ref) {
             true -> {
                 if (size >= max) {
-                    this.loadMoreComplete()
+                    this.loadMoreModule.loadMoreComplete()
                 } else {
-                    this.loadMoreEnd(true)
+                    this.loadMoreModule.loadMoreEnd(true)
                 }
-                this.setNewData(list)
+                this.setList(list)
             }
             false -> {
                 if (size >= max) {
-                    this.loadMoreEnd()
+                    this.loadMoreModule.loadMoreEnd()
                 } else {
-                    this.loadMoreEnd(true)
+                    this.loadMoreModule.loadMoreEnd(true)
                 }
                 this.addData(list)
             }
         }
     } else {
         if (this.data.size >= max) {
-            this.loadMoreEnd()
+            this.loadMoreModule.loadMoreEnd()
         } else {
-            this.loadMoreEnd(true)
+            this.loadMoreModule.loadMoreEnd(true)
         }
     }
-    this.disableLoadMoreIfNotFullPage()
 }

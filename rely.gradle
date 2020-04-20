@@ -26,7 +26,7 @@ versions.utilcode = '1.7.1'
 versions.etext = '0.1.4'
 versions.banner = '2.1.5'
 versions.transforms = '1.2.32'
-versions.helper = '2.9.46'
+versions.helper = '3.0.2'
 versions.divider = '1.0.0'
 versions.diagonal = '1.0.9'
 versions.multidex = '1.0.3'
@@ -36,10 +36,13 @@ versions.svg = '1.0.5'
 versions.easypermissions = '3.0.0'
 versions.pictureSelector = 'v2.2.4'
 versions.avatar = '1.0.4'
-versions.fragmentation = '1.0.1'
+versions.fragmentation = '1.0.2'
 versions.flowlayout = '1.1.2'
 versions.spinKit = '1.4.0'
 versions.autosize = '1.1.2'
+versions.arouter_api = '1.5.0'
+versions.arouter_compiler = '1.2.2'
+versions.viewpage2 = '1.0.0'
 
 
 def build = [:]
@@ -49,11 +52,19 @@ build.targetSdk = 29
 build.tools = "29.0.2"
 deeps.build = build
 
+
+def arouter=[:]
+arouter.api =  "com.alibaba:arouter-api:$versions.arouter_api"
+arouter.compiler = "com.alibaba:arouter-compiler:$versions.arouter_compiler"
+deeps.arouter = arouter
+
 def ktx = [:]
 ktx.fragment = "androidx.fragment:fragment-ktx:$versions.ktx"
 ktx.collection = "androidx.collection:collection-ktx:$versions.ktx"
 ktx.coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.ktx"
 ktx.core = "androidx.core:core-ktx:$versions.core"
+ktx.viewpager2 = "androidx.viewpager2:viewpager2:$versions.viewpage2"
+ktx.material = "com.google.android.material:material:$versions.viewpage2"
 deeps.ktx = ktx
 
 def gradle = [:]

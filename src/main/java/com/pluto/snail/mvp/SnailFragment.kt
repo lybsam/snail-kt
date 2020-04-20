@@ -1,12 +1,12 @@
 package com.pluto.snail.mvp
 
 import android.os.Bundle
-import com.pluto.snail.proxys.SnailDelegate
+import androidx.fragment.app.Fragment
 import java.lang.reflect.ParameterizedType
 
-abstract class SnailDelegate<out P : SnailPresenter<com.pluto.snail.mvp.SnailDelegate<P>>> :
+abstract class SnailFragment<out P : SnailPresenter<SnailFragment<P>>> :
     IMvpView<P>,
-    SnailDelegate() {
+    Fragment() {
     override val presenter: @UnsafeVariance P
 
     init {
@@ -16,7 +16,7 @@ abstract class SnailDelegate<out P : SnailPresenter<com.pluto.snail.mvp.SnailDel
 
     private fun createPresenter(): P {
         sequence {
-            var thisClass: Class<*> = this@SnailDelegate.javaClass
+            var thisClass: Class<*> = this@SnailFragment.javaClass
             while (true) {
                 thisClass.genericSuperclass?.let { yield(it) }
                 thisClass = thisClass.superclass ?: break
@@ -38,11 +38,10 @@ abstract class SnailDelegate<out P : SnailPresenter<com.pluto.snail.mvp.SnailDel
         presenter.onCreate(savedInstanceState)
     }
 
-
     override fun onLazyInitView(savedInstanceState: Bundle?) {
-        super.onLazyInitView(savedInstanceState)
         presenter.onLazyInitView(savedInstanceState)
     }
+
 
     override fun onStart() {
         super.onStart()

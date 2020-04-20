@@ -41,6 +41,10 @@ abstract class ProxyActivity : AppCompatActivity(), ISupportActivity {
         DELEGATE.onBackPressedSupport()
     }
 
+    override fun onBackPressed() {
+        DELEGATE.onBackPressed()
+    }
+
     override fun extraTransaction(): ExtraTransaction {
         return DELEGATE.extraTransaction()
     }
