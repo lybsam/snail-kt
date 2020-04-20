@@ -5,8 +5,8 @@ import com.chad.library.adapter.base.BaseMultiItemQuickAdapter
 import com.chad.library.adapter.base.listener.GridSpanSizeLookup
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 
-abstract class QuickMultipleAdapter<T>(list: MutableList<QuickMultipleEntity<T>>) :
-    BaseMultiItemQuickAdapter<QuickMultipleEntity<T>, BaseViewHolder>(list), GridSpanSizeLookup {
+abstract class QuickMultipleAdapter(list: MutableList<QuickMultipleItemEntity>) :
+    BaseMultiItemQuickAdapter<QuickMultipleItemEntity, BaseViewHolder>(list), GridSpanSizeLookup {
     init {
         setGridSpanSizeLookup(this)
     }
@@ -16,6 +16,6 @@ abstract class QuickMultipleAdapter<T>(list: MutableList<QuickMultipleEntity<T>>
         viewType: Int,
         position: Int
     ): Int {
-        return data[position].spanSize
+        return data[position].getSpanSize()
     }
 }

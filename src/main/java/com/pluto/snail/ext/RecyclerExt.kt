@@ -9,10 +9,8 @@ import com.pluto.snail.ui.recycler.BaseDecoration
 import com.pluto.snail.ui.recycler.QuickMultipleAdapter
 
 
-
-
-fun <T> RecyclerView.initMultiple(
-    mAdapter: QuickMultipleAdapter<T>,
+fun <T : QuickMultipleAdapter> RecyclerView.initMultiple(
+    mAdapter: T,
     span: Int = 4,
     size: Int = 0,
     color: Int = R.color.white,
